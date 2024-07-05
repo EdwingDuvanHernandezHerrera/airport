@@ -1,10 +1,9 @@
 package org.vuelosglobales.manufacturer.domain;
 
+
 public class Manufacturer {
     private  int id;
     private String name;
-
-    private List lista;
 
     public Manufacturer() {
     }
@@ -29,5 +28,11 @@ public class Manufacturer {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Manufacturer [id=" + id + ", name=" + name + "]";
+    }
+    
 }
 
