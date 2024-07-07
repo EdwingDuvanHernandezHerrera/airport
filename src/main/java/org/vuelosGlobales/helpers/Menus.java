@@ -12,6 +12,10 @@ import org.vuelosGlobales.status.adapter.out.StatusMySQLRepository;
 import org.vuelosGlobales.status.adapter.in.StatusConsoleAdapter;
 import org.vuelosGlobales.status.application.StatusService;
 
+import org.vuelosGlobales.airline.adapter.out.AirlineMySQLRepository;
+import org.vuelosGlobales.airline.adapter.in.AirlineConsoleAdap;
+import org.vuelosGlobales.airline.application.AirlineService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -31,7 +35,10 @@ public class Menus {
     StatusMySQLRepository statusOut = new StatusMySQLRepository(url, user, password);
     StatusService statusService = new StatusService(statusOut);
     StatusConsoleAdapter statusIn = new StatusConsoleAdapter(statusService);
-    
+
+    AirlineMySQLRepository airlineOut = new AirlineMySQLRepository(url, user, password);
+    AirlineService airlineService = new AirlineService(airlineOut);
+    AirlineConsoleAdap airlineIn = new AirlineConsoleAdap(airlineService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -89,7 +96,7 @@ public class Menus {
             } else if (opcion == 2){
 //                airportIn.crudAirport();
             } else if (opcion == 3){
-//                airlineIn.crudAirline();
+                airlineIn.crudAirline();
             } else if (opcion == 4) {
 //                tripConsoleAdapter.crudTrip();
             } else if (opcion == 13) {
