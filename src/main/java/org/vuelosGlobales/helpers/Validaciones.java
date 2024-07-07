@@ -1,8 +1,12 @@
 package org.vuelosGlobales.helpers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Supplier;
+
 
 public class Validaciones {
 
@@ -60,4 +64,36 @@ public class Validaciones {
         }
         return option;
     }
+
+    public <T> String validarExistPlate(String mensaje, Validator<T> validator){
+        Validaciones validaciones = new Validaciones();
+        while (true) {
+            String input = validaciones.validarString(mensaje);
+            Optional<T> validatonResult = validator.validate(input.toUpperCase());
+            if (validatonResult.isPresent()) {
+                System.out.println("El dato ingresado ya existe");
+            } else {
+                return input;
+            }
+        }
+    }
+
+    public Date validarFecha(String mensaje) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        Date fecha = null;
+
+        while (fecha == null) {
+            System.out.print(mensaje);
+            String input = scanner.nextLine();
+            try {
+                java.util.Date utilDate = dateFormat.parse(input);
+                fecha = new Date(utilDate.getTime());
+            } catch (ParseException e) {
+                System.out.println("Fecha inválida. Formato correcto: YYYY-MM-DD.");
+            }
+        }
+        return fecha;
+    }
+
 }

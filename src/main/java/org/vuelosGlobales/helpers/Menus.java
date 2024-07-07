@@ -16,6 +16,10 @@ import org.vuelosGlobales.airline.adapter.out.AirlineMySQLRepository;
 import org.vuelosGlobales.airline.adapter.in.AirlineConsoleAdap;
 import org.vuelosGlobales.airline.application.AirlineService;
 
+import org.vuelosGlobales.plane.adapter.out.PlaneMySQLRepository;
+import org.vuelosGlobales.plane.adapter.in.PlaneConsoleAdapter;
+import org.vuelosGlobales.plane.application.PlaneService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -39,6 +43,10 @@ public class Menus {
     AirlineMySQLRepository airlineOut = new AirlineMySQLRepository(url, user, password);
     AirlineService airlineService = new AirlineService(airlineOut);
     AirlineConsoleAdap airlineIn = new AirlineConsoleAdap(airlineService);
+
+    PlaneMySQLRepository planeOut = new PlaneMySQLRepository(url, user, password);
+    PlaneService planeService = new PlaneService(planeOut, statusOut, modelOut, airlineOut);
+    PlaneConsoleAdapter planeIn = new PlaneConsoleAdapter(planeService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -92,7 +100,7 @@ public class Menus {
             int opcion = validaciones.validarInt("Seleccione un opción: ");
 
             if (opcion == 1){
-//                planeIn.crudPlane();
+                planeIn.crudPlane();
             } else if (opcion == 2){
 //                airportIn.crudAirport();
             } else if (opcion == 3){
