@@ -20,6 +20,14 @@ import org.vuelosGlobales.plane.adapter.out.PlaneMySQLRepository;
 import org.vuelosGlobales.plane.adapter.in.PlaneConsoleAdapter;
 import org.vuelosGlobales.plane.application.PlaneService;
 
+import org.vuelosGlobales.country.adapter.out.CountryMySQLRepository;
+import org.vuelosGlobales.country.adapter.in.CountryConsoleAdapter;
+import org.vuelosGlobales.country.application.CountryService;
+
+import org.vuelosGlobales.city.adapter.out.CityMySQLRepository;
+import org.vuelosGlobales.city.adapter.in.CityConsoleAdapter;
+import org.vuelosGlobales.city.application.CityService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -47,6 +55,14 @@ public class Menus {
     PlaneMySQLRepository planeOut = new PlaneMySQLRepository(url, user, password);
     PlaneService planeService = new PlaneService(planeOut, statusOut, modelOut, airlineOut);
     PlaneConsoleAdapter planeIn = new PlaneConsoleAdapter(planeService);
+
+    CountryMySQLRepository countryOut = new CountryMySQLRepository(url, user, password);
+    CountryService countryService = new CountryService(countryOut);
+    CountryConsoleAdapter countryIn = new CountryConsoleAdapter(countryService);
+
+    CityMySQLRepository cityOut = new CityMySQLRepository(url, user, password);
+    CityService cityService = new CityService(cityOut, countryOut);
+    CityConsoleAdapter cityIn = new CityConsoleAdapter(cityService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -108,9 +124,9 @@ public class Menus {
             } else if (opcion == 4) {
 //                tripConsoleAdapter.crudTrip();
             } else if (opcion == 13) {
-//                countryIn.crudCountry();
+                countryIn.crudCountry();
             } else if (opcion == 14) {
-//                cityIn.crudCity();
+                cityIn.crudCity();
             } else if (opcion == 10) {
                 manufacturerIn.menuManufacturer();
             } else if (opcion == 11) {
