@@ -36,14 +36,15 @@ import org.vuelosGlobales.role.adapter.in.RoleConsoleAdap;
 import org.vuelosGlobales.role.adapter.out.RoleMySQLRepository;
 import org.vuelosGlobales.role.application.RoleService;
 
+import org.vuelosGlobales.employee.adapter.in.EmployeeConsoleAdap;
+import org.vuelosGlobales.employee.adapter.out.EmployeeMySQLRepository;
+import org.vuelosGlobales.employee.application.EmployeeService;
 
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
     final String user = "campus2024";
     final String password = "Edhh0205761";
-
-    
 
     ManufacturerMYSQLRepository manufacturerOut = new ManufacturerMYSQLRepository(url, user, password);
     ManufacturerService manufacturerService = new ManufacturerService(manufacturerOut);
@@ -80,6 +81,10 @@ public class Menus {
     RoleMySQLRepository roleOut = new RoleMySQLRepository(url, user, password);
     RoleService roleService = new RoleService(roleOut);
     RoleConsoleAdap roleIn = new RoleConsoleAdap(roleService);
+
+    EmployeeMySQLRepository employOut = new EmployeeMySQLRepository(url, user, password);
+    EmployeeService employService = new EmployeeService(employOut, roleOut, airlineOut, airportOut);
+    EmployeeConsoleAdap employeeIn = new EmployeeConsoleAdap(employService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -155,7 +160,7 @@ public class Menus {
             } else if (opcion == 15) {
                 break menuAdmin;
             } else if (opcion == 5) {
-//                employeeIn.crudEmployee();
+                employeeIn.crudEmployee();
             } else if (opcion == 6) {
 //                tripCrewIn.crew();
             } else if (opcion == 8) {
