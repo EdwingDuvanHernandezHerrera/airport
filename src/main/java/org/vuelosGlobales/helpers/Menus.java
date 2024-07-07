@@ -40,6 +40,10 @@ import org.vuelosGlobales.employee.adapter.in.EmployeeConsoleAdap;
 import org.vuelosGlobales.employee.adapter.out.EmployeeMySQLRepository;
 import org.vuelosGlobales.employee.application.EmployeeService;
 
+import org.vuelosGlobales.revision.adapter.in.RevisionConsoleAdapter;
+import org.vuelosGlobales.revision.adapter.out.RevisionMySQLRepository;
+import org.vuelosGlobales.revision.application.RevisionService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -86,6 +90,11 @@ public class Menus {
     EmployeeService employService = new EmployeeService(employOut, roleOut, airlineOut, airportOut);
     EmployeeConsoleAdap employeeIn = new EmployeeConsoleAdap(employService);
 
+    RevisionMySQLRepository revisionOut = new RevisionMySQLRepository(url, user, password);
+    RevisionService revisionService = new RevisionService(revisionOut, planeOut, airlineOut, employOut);
+    RevisionConsoleAdapter revisionIn = new RevisionConsoleAdapter(revisionService);
+
+
     Validaciones validaciones = new Validaciones();
     
     public void menuPrincipal(){
@@ -105,7 +114,7 @@ public class Menus {
             }else if (opcion == 2){
                 optionsSalesAgent();
             } else if (opcion == 3) {
-//                revisionIn.crudRevision();
+                revisionIn.crudRevision();
             } else if (opcion == 5) {
                 break menuAdmin;
             }
