@@ -28,6 +28,10 @@ import org.vuelosGlobales.city.adapter.out.CityMySQLRepository;
 import org.vuelosGlobales.city.adapter.in.CityConsoleAdapter;
 import org.vuelosGlobales.city.application.CityService;
 
+import org.vuelosGlobales.airport.adapter.out.AirportMySQLRepository;
+import org.vuelosGlobales.airport.adapter.in.AirportConsoleAdapter;
+import org.vuelosGlobales.airport.application.AirportService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -63,6 +67,10 @@ public class Menus {
     CityMySQLRepository cityOut = new CityMySQLRepository(url, user, password);
     CityService cityService = new CityService(cityOut, countryOut);
     CityConsoleAdapter cityIn = new CityConsoleAdapter(cityService);
+
+    AirportMySQLRepository airportOut = new AirportMySQLRepository(url, user, password);
+    AirportService airportService = new AirportService(airportOut, cityOut);
+    AirportConsoleAdapter airportIn = new AirportConsoleAdapter(airportService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -118,7 +126,7 @@ public class Menus {
             if (opcion == 1){
                 planeIn.crudPlane();
             } else if (opcion == 2){
-//                airportIn.crudAirport();
+                airportIn.crudAirport();
             } else if (opcion == 3){
                 airlineIn.crudAirline();
             } else if (opcion == 4) {
