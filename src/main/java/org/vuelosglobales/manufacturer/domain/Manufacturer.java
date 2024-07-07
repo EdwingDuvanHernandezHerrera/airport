@@ -31,7 +31,10 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacturer [id=" + id + ", name=" + name + "]";
+        String separator = String.format("|%s|%s|", "-".repeat(12), "-".repeat(22));
+        String record = String.format("| %-10d | %-20s |", id, name);
+
+        return  separator + "\n" + record;
     }
     
 }
