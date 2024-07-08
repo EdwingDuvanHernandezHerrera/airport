@@ -1,5 +1,7 @@
 package org.vuelosGlobales.helpers;
-
+import org.vuelosGlobales.customer.adapter.in.CustomerConsoleAdapter;
+import org.vuelosGlobales.customer.adapter.out.CustomerMySQLRepository;
+import org.vuelosGlobales.customer.application.CustomerService;
 import org.vuelosGlobales.manufacturer.adapter.in.ManufacturerConsoleAdapter;
 import org.vuelosGlobales.manufacturer.adapter.out.ManufacturerMYSQLRepository;
 import org.vuelosGlobales.manufacturer.application.ManufacturerService;
@@ -47,6 +49,11 @@ import org.vuelosGlobales.revision.application.RevisionService;
 import org.vuelosGlobales.document.adapter.in.DocumentConsoleAdapter;
 import org.vuelosGlobales.document.adapter.out.DocumentMySQLRepository;
 import org.vuelosGlobales.document.application.DocumentService;
+
+import org.vuelosGlobales.fare.adapter.in.FareConsoleAdapter;
+import org.vuelosGlobales.fare.adapter.out.FareMySQLRepository;
+import org.vuelosGlobales.fare.application.FareService;
+
 
 public class Menus {
 
@@ -102,6 +109,13 @@ public class Menus {
     DocumentService documentService = new DocumentService(documentOut);
     DocumentConsoleAdapter documentIn = new DocumentConsoleAdapter(documentService);
 
+    FareMySQLRepository fareOut = new FareMySQLRepository(url, user, password);
+    FareService fareService = new FareService(fareOut);
+    FareConsoleAdapter fareIn = new FareConsoleAdapter(fareService);
+
+    CustomerMySQLRepository customerOut = new CustomerMySQLRepository(url, user, password);
+    CustomerService customerService = new CustomerService(customerOut, documentOut);
+    CustomerConsoleAdapter customerIn = new CustomerConsoleAdapter(customerService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -181,7 +195,7 @@ public class Menus {
             } else if (opcion == 6) {
 //                tripCrewIn.crew();
             } else if (opcion == 8) {
-//                fareIn.crudFares();
+                fareIn.crudFares();
             } else if (opcion == 9) {
                 documentIn.crudDocument();
             } else {
@@ -201,7 +215,7 @@ public class Menus {
             System.out.println("+-----------------------------+");
             int opcion = validaciones.validarInt("Seleccione una opción: ");
             if (opcion == 1){
-//                customerIn.crudCustomer();
+                customerIn.crudCustomer();
             } else if (opcion == 2) {
 //                flightResIn.crudFlightRes();
             } else if (opcion == 3) {
