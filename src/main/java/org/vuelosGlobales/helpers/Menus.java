@@ -62,6 +62,10 @@ import org.vuelosGlobales.trip.adapter.in.TripConsoleAdapter;
 import org.vuelosGlobales.trip.adapter.out.TripMySQLRepository;
 import org.vuelosGlobales.trip.application.TripService;
 
+import org.vuelosGlobales.tripcrew.adapter.in.TripCrewConsoleAdap;
+import org.vuelosGlobales.tripcrew.adapter.out.TripCrewMySQLRepository;
+import org.vuelosGlobales.tripcrew.application.TripCrewService;
+
 
 
 public class Menus {
@@ -131,6 +135,10 @@ public class Menus {
     TripMySQLRepository tripOut = new TripMySQLRepository(url, user, password);
     TripService tripService = new TripService(tripOut, airportOut, planeOut, connectionOut);
     TripConsoleAdapter tripIn = new TripConsoleAdapter(tripService);
+
+    TripCrewMySQLRepository tripCrewOut = new TripCrewMySQLRepository(url, user, password);
+    TripCrewService tripCrewService = new TripCrewService(tripCrewOut, airlineOut, employOut, connectionOut, tripOut);
+    TripCrewConsoleAdap tripCrewIn = new TripCrewConsoleAdap(tripCrewService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -208,7 +216,7 @@ public class Menus {
             } else if (opcion == 5) {
                 employeeIn.crudEmployee();
             } else if (opcion == 6) {
-//                tripCrewIn.crew();
+                tripCrewIn.crew();
             } else if (opcion == 8) {
                 fareIn.crudFares();
             } else if (opcion == 9) {
