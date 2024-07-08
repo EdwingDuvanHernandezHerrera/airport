@@ -44,6 +44,10 @@ import org.vuelosGlobales.revision.adapter.in.RevisionConsoleAdapter;
 import org.vuelosGlobales.revision.adapter.out.RevisionMySQLRepository;
 import org.vuelosGlobales.revision.application.RevisionService;
 
+import org.vuelosGlobales.document.adapter.in.DocumentConsoleAdapter;
+import org.vuelosGlobales.document.adapter.out.DocumentMySQLRepository;
+import org.vuelosGlobales.document.application.DocumentService;
+
 public class Menus {
 
     final String url = "jdbc:mysql://localhost:3306/airport";
@@ -93,6 +97,10 @@ public class Menus {
     RevisionMySQLRepository revisionOut = new RevisionMySQLRepository(url, user, password);
     RevisionService revisionService = new RevisionService(revisionOut, planeOut, airlineOut, employOut);
     RevisionConsoleAdapter revisionIn = new RevisionConsoleAdapter(revisionService);
+
+    DocumentMySQLRepository documentOut = new DocumentMySQLRepository(url, user, password);
+    DocumentService documentService = new DocumentService(documentOut);
+    DocumentConsoleAdapter documentIn = new DocumentConsoleAdapter(documentService);
 
 
     Validaciones validaciones = new Validaciones();
@@ -175,7 +183,7 @@ public class Menus {
             } else if (opcion == 8) {
 //                fareIn.crudFares();
             } else if (opcion == 9) {
-//                documentIn.crudDocument();
+                documentIn.crudDocument();
             } else {
                 System.out.println("Opción incorrecta");
             }
