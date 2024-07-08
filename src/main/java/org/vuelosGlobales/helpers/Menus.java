@@ -4,6 +4,7 @@ import org.vuelosGlobales.customer.adapter.in.CustomerConsoleAdapter;
 import org.vuelosGlobales.customer.adapter.out.CustomerMySQLRepository;
 import org.vuelosGlobales.customer.application.CustomerService;
 
+
 import org.vuelosGlobales.manufacturer.adapter.in.ManufacturerConsoleAdapter;
 import org.vuelosGlobales.manufacturer.adapter.out.ManufacturerMYSQLRepository;
 import org.vuelosGlobales.manufacturer.application.ManufacturerService;
@@ -65,6 +66,12 @@ import org.vuelosGlobales.trip.application.TripService;
 import org.vuelosGlobales.tripcrew.adapter.in.TripCrewConsoleAdap;
 import org.vuelosGlobales.tripcrew.adapter.out.TripCrewMySQLRepository;
 import org.vuelosGlobales.tripcrew.application.TripCrewService;
+
+import org.vuelosGlobales.passenger.adapter.out.PassengerMySQLRepo;
+
+import org.vuelosGlobales.flightRes.adapter.in.FlightResConsoleAdapter;
+import org.vuelosGlobales.flightRes.adapter.out.FlightResMySQLRepository;
+import org.vuelosGlobales.flightRes.application.FlightResService;
 
 
 
@@ -139,6 +146,13 @@ public class Menus {
     TripCrewMySQLRepository tripCrewOut = new TripCrewMySQLRepository(url, user, password);
     TripCrewService tripCrewService = new TripCrewService(tripCrewOut, airlineOut, employOut, connectionOut, tripOut);
     TripCrewConsoleAdap tripCrewIn = new TripCrewConsoleAdap(tripCrewService);
+
+    PassengerMySQLRepo passengerOut = new PassengerMySQLRepo(url, user, password);
+
+
+    FlightResMySQLRepository flightResOut = new FlightResMySQLRepository(url, user, password);
+    FlightResService flightResService = new FlightResService(flightResOut, customerOut, tripOut, fareOut, passengerOut, documentOut);
+    FlightResConsoleAdapter flightResIn = new FlightResConsoleAdapter(flightResService);
 
     Validaciones validaciones = new Validaciones();
     
@@ -240,7 +254,7 @@ public class Menus {
             if (opcion == 1){
                 customerIn.crudCustomer();
             } else if (opcion == 2) {
-//                flightResIn.crudFlightRes();
+                flightResIn.crudFlightRes();
             } else if (opcion == 3) {
                 break salesAgent;
             }else {
