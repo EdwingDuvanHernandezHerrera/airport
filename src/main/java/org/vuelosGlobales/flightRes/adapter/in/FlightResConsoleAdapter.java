@@ -94,6 +94,7 @@ public class FlightResConsoleAdapter {
                         }
                     }
                     mostrarTicket(idReserva, vuelo.getPriceTrip());
+                    System.out.println("Reservación realizada con éxito\n");
                     break;
                 case 3:
                     mostrarClientes();
@@ -112,7 +113,7 @@ public class FlightResConsoleAdapter {
                         flightResService.updateStatusReservation(idCacelar);
                     }else {
                     }
-                    System.out.println();
+                    System.out.println("Reservación cancelada con éxito\n");
                     break;
                 case 5:
                     mostrarClientes();
@@ -124,6 +125,7 @@ public class FlightResConsoleAdapter {
                         flightResService.deleteReservation(idDelete);
                     }else {
                     }
+                    System.out.println("Registro eliminado con éxito\n");
                     break;
 
                 case 6:

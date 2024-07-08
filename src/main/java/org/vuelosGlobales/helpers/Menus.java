@@ -180,8 +180,9 @@ public class Menus {
         }
     }
 
-    public void menuSystemAdmin(){
-        menuAdmin: while(true){
+    public void menuSystemAdmin() {
+        menuAdmin:
+        while (true) {
             System.out.println("======================================");
             System.out.println("            MENÚ PRINCIPAL           ");
             System.out.println("======================================");
@@ -205,11 +206,11 @@ public class Menus {
 
             int opcion = validaciones.validarInt("Seleccione un opción: ");
 
-            if (opcion == 1){
+            if (opcion == 1) {
                 planeIn.crudPlane();
-            } else if (opcion == 2){
+            } else if (opcion == 2) {
                 airportIn.crudAirport();
-            } else if (opcion == 3){
+            } else if (opcion == 3) {
                 airlineIn.crudAirline();
             } else if (opcion == 4) {
                 tripIn.crudTrip();
