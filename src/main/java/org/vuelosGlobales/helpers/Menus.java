@@ -1,7 +1,9 @@
 package org.vuelosGlobales.helpers;
+
 import org.vuelosGlobales.customer.adapter.in.CustomerConsoleAdapter;
 import org.vuelosGlobales.customer.adapter.out.CustomerMySQLRepository;
 import org.vuelosGlobales.customer.application.CustomerService;
+
 import org.vuelosGlobales.manufacturer.adapter.in.ManufacturerConsoleAdapter;
 import org.vuelosGlobales.manufacturer.adapter.out.ManufacturerMYSQLRepository;
 import org.vuelosGlobales.manufacturer.application.ManufacturerService;
@@ -53,6 +55,13 @@ import org.vuelosGlobales.document.application.DocumentService;
 import org.vuelosGlobales.fare.adapter.in.FareConsoleAdapter;
 import org.vuelosGlobales.fare.adapter.out.FareMySQLRepository;
 import org.vuelosGlobales.fare.application.FareService;
+
+import org.vuelosGlobales.connection.adapter.out.ConnectionMySQLRepository;
+
+import org.vuelosGlobales.trip.adapter.in.TripConsoleAdapter;
+import org.vuelosGlobales.trip.adapter.out.TripMySQLRepository;
+import org.vuelosGlobales.trip.application.TripService;
+
 
 
 public class Menus {
@@ -117,6 +126,12 @@ public class Menus {
     CustomerService customerService = new CustomerService(customerOut, documentOut);
     CustomerConsoleAdapter customerIn = new CustomerConsoleAdapter(customerService);
 
+    ConnectionMySQLRepository connectionOut = new ConnectionMySQLRepository(url, user, password);
+
+    TripMySQLRepository tripOut = new TripMySQLRepository(url, user, password);
+    TripService tripService = new TripService(tripOut, airportOut, planeOut, connectionOut);
+    TripConsoleAdapter tripIn = new TripConsoleAdapter(tripService);
+
     Validaciones validaciones = new Validaciones();
     
     public void menuPrincipal(){
@@ -175,7 +190,7 @@ public class Menus {
             } else if (opcion == 3){
                 airlineIn.crudAirline();
             } else if (opcion == 4) {
-//                tripConsoleAdapter.crudTrip();
+                tripIn.crudTrip();
             } else if (opcion == 13) {
                 countryIn.crudCountry();
             } else if (opcion == 14) {
